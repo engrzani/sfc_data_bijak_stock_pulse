@@ -1,0 +1,23 @@
+
+{% extends "base.html" %}
+{% block content %}
+<div class="row">
+    <div class="col-md-12">
+        <h1 class="nasdaq-blue text-white p-3 rounded">Market Overview</h1>
+        <p>Total Records: {{ summary.total_rows }} | Anomalies: <span class="anomaly-red">{{ summary.total_anomalies }}</span> | Tickers: {{ summary.tickers }}</p>
+    </div>
+</div>
+<div class="row" style="margin-top: 5px;">
+    {% for ticker in tickers %}
+    <div class="col-md-3">
+        <div class="card" style="margin-bottom: 20px;">
+            <div class="card-body">
+                <h5 class="card-title">{{ ticker }}</h5>
+                <p class="card-text">Last Close: ${{ summary.top_tickers[ticker]|round(2) }}</p>
+                <a href="/ticker/{{ ticker }}" class="btn btn-primary">View</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

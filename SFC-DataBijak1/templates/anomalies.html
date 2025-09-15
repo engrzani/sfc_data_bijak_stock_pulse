@@ -1,0 +1,19 @@
+    {% extends "base.html" %}
+{% block content %}
+<h1>Anomalies</h1>
+<form method="GET">
+    <select name="ticker" class="form-select w-25">
+        <option value="">All Tickers</option>
+        {% for t in tickers %}<option value="{{ t }}" {% if request.args.ticker == t %}selected{% endif %}>{{ t }}</option>{% endfor %}
+    </select>
+    <button type="submit" class="btn btn-primary">Filter</button>
+</form>
+<table class="table table-striped">
+    <thead><tr><th>Ticker</th><th>Date</th><th>Close</th><th>Score</th></tr></thead>
+    <tbody>
+        {% for row in anomalies %}
+        <tr><td>{{ row.ticker }}</td><td>{{ row.date }}</td><td>${{ row.close|round(2) }}</td><td>{{ row.anomaly_score|round(4) }}</td></tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

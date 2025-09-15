@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Anomaly Detection Reports</h1>
+<table class="table">
+    <thead><tr><th>Ticker</th><th>Precision</th><th>Recall</th><th>F1</th></tr></thead>
+    <tbody>
+        {% for m in metrics %}
+        <tr><td>{{ m.ticker }}</td><td>{{ m.precision|round(3) }}</td><td>{{ m.recall|round(3) }}</td><td>{{ m.f1|round(3) }}</td></tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
